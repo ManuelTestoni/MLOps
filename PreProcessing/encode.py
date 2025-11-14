@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 
-def encode_features() -> pd.DataFrame:
+def encode_features():
     """
     Executes one hot encoding and binary encoding on the dataset.
     """
