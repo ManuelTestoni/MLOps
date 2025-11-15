@@ -15,7 +15,7 @@ def split_data():
     TEST_DIR.mkdir(parents=True, exist_ok=True)
 
     #Load the dataset
-    df = pd.read_csv(DIR / "data.csv")
+    df = pd.read_csv(DIR / "data_encoded.csv")
     X = df.drop(columns=["Churn"])
     y = df["Churn"]
     try:
@@ -27,14 +27,17 @@ def split_data():
     
     # CSV and Pickle Dump
     X_train.to_csv(DIR / "train/X_train.csv", index=False)
-    X_test.to_csv(DIR / "train/X_test.csv", index=False)
-    y_train.to_csv(DIR / "test/y_train.csv", index=False)
+    X_test.to_csv(DIR / "test/X_test.csv", index=False)
+    y_train.to_csv(DIR / "train/y_train.csv", index=False)
     y_test.to_csv(DIR / "test/y_test.csv", index=False)
     pickle.dump(X_train.columns.tolist(), open(DIR / "train/feature_columns.pkl", "wb"))
     pickle.dump(y_train.name, open(DIR / "train/target_column.pkl", "wb"))
     pickle.dump(X_test.columns.tolist(), open(DIR / "test/feature_columns_test.pkl", "wb"))
     pickle.dump(y_test.name, open(DIR / "test/target_column_test.pkl", "wb"))
 
+    print("-------------------------")
+    print("Data Splitting Completed")
+    print("-------------------------")
 
 if __name__ == "__main__":
     split_data()

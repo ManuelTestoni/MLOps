@@ -17,7 +17,7 @@ def clean_data():
     df = df.dropna()
     df = df.drop(columns=["customerID"])
     df["SeniorCitizen"] = df["SeniorCitizen"].replace({1: "Yes", 0: "No"})
-    df.to_csv(OUTPUT_DIR / 'data.csv', index=False)
+    df.to_csv(OUTPUT_DIR / 'data_cleaned.csv', index=False)
 
     print("-------------------------")
     print("Data Cleaning Completed")

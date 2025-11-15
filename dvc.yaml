@@ -1,0 +1,35 @@
+stages:
+  clean:
+    cmd: python PreProcessing/clean.py
+    deps:
+      - data/raw/data.csv
+      - PreProcessing/clean.py
+    outs:
+      - data/processed/data_cleaned.csv
+
+  encode:
+    cmd: python PreProcessing/encode.py
+    deps:
+      - data/processed/data_cleaned.csv
+      - PreProcessing/encode.py
+    outs:
+      - data/processed/data_encoded.csv
+
+  scale:
+    cmd: python PreProcessing/scale.py
+    deps:
+      - data/processed/data_encoded.csv
+      - PreProcessing/scale.py
+    outs:
+      - data/processed/data_scaled.csv
+
+  split:
+    cmd: python PreProcessing/split.py
+    deps:
+      - data/processed/data_encoded.csv
+      - PreProcessing/split.py
+    outs:
+      - data/processed/train/X_train.csv
+      - data/processed/test/X_test.csv
+      - data/processed/train/y_train.csv
+      - data/processed/test/y_test.csv

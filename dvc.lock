@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  clean:
+    cmd: python PreProcessing/clean.py
+    deps:
+    - path: PreProcessing/clean.py
+      hash: md5
+      md5: 47c28d009267cb6e88a597e0a1c50d88
+      size: 790
+    - path: data/raw/data.csv
+      hash: md5
+      md5: 0f9de68e012bd3aed5fa7cdc9fc421af
+      size: 977501
+    outs:
+    - path: data/processed/data_cleaned.csv
+      hash: md5
+      md5: 6a9a5a59515842104cc2d3e9d2b2fdce
+      size: 900327
+  encode:
+    cmd: python PreProcessing/encode.py
+    deps:
+    - path: PreProcessing/encode.py
+      hash: md5
+      md5: f74136beb0948ce60b84a05eea303076
+      size: 1734
+    - path: data/processed/data_cleaned.csv
+      hash: md5
+      md5: 6a9a5a59515842104cc2d3e9d2b2fdce
+      size: 900327
+    outs:
+    - path: data/processed/data_encoded.csv
+      hash: md5
+      md5: b213e58add1549562cbc94b9cc3eca0d
+      size: 1191483
+  scale:
+    cmd: python PreProcessing/scale.py
+    deps:
+    - path: PreProcessing/scale.py
+      hash: md5
+      md5: a6780d5e71041b4f141ada96fb3d5b61
+      size: 743
+    - path: data/processed/data_encoded.csv
+      hash: md5
+      md5: b213e58add1549562cbc94b9cc3eca0d
+      size: 1191483
+    outs:
+    - path: data/processed/data_scaled.csv
+      hash: md5
+      md5: 310506d79658e0b91d597f8484914967
+      size: 1530742
+  split:
+    cmd: python PreProcessing/split.py
+    deps:
+    - path: PreProcessing/split.py
+      hash: md5
+      md5: 98a339e6a9c363873e552c0727b1eb9c
+      size: 1530
+    - path: data/processed/data_encoded.csv
+      hash: md5
+      md5: b213e58add1549562cbc94b9cc3eca0d
+      size: 1191483
+    outs:
+    - path: data/processed/test/X_test.csv
+      hash: md5
+      md5: 3a82a0261b8e4fad314ba3d5f7c6facd
+      size: 236043
+    - path: data/processed/test/y_test.csv
+      hash: md5
+      md5: 72929f3fd26b9a2d2f498d24bed869d2
+      size: 2820
+    - path: data/processed/train/X_train.csv
+      hash: md5
+      md5: c7f0ebc9e066b062897c8e88e31e010b
+      size: 942016
+    - path: data/processed/train/y_train.csv
+      hash: md5
+      md5: 876bada6439c1f33dc5f17218a6915d5
+      size: 11256

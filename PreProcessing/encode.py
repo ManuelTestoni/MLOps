@@ -10,7 +10,7 @@ def encode_features():
     # Setting up paths
     DIR = Path("data/processed/")
 
-    df = pd.read_csv(DIR / "data.csv")
+    df = pd.read_csv(DIR / "data_cleaned.csv")
 
     # -----------------------------
     # 1. Binary Columns → 0/1
@@ -57,7 +57,11 @@ def encode_features():
     #Creating file if not exists
     with open("data/processed/feature_columns.json", "w") as f:
         json.dump(feature_columns, f, indent=4)
-    df.to_csv(DIR / 'data.csv', index=False)
+    df.to_csv(DIR / 'data_encoded.csv', index=False)
     
+    print("-------------------------")
+    print("Data Encoding Completed")
+    print("-------------------------")
+
 if __name__ == "__main__":
     encode_features()
