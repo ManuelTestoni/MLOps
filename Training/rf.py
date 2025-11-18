@@ -23,4 +23,3 @@ def random_forest_training(X_train, y_train, X_test, y_test):
     feature = pd.DataFrame(rf.feature_importances_, index = X.columns)
     print("Feature Importances:")
     print(feature)
-
