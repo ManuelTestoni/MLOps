@@ -39,5 +39,7 @@ def split_data():
     print("Data Splitting Completed")
     print("-------------------------")
 
+    return X_train, y_train, X_test, y_test
+
 if __name__ == "__main__":
     split_data()
