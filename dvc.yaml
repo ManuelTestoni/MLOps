@@ -33,3 +33,23 @@ stages:
       - data/processed/test/X_test.csv
       - data/processed/train/y_train.csv
       - data/processed/test/y_test.csv
+
+  train_rf:
+    cmd: python Training/rf.py
+    deps:
+      - data/processed/train/X_train.csv
+      - data/processed/test/X_test.csv
+      - data/processed/train/y_train.csv
+      - data/processed/test/y_test.csv
+    outs:
+      - models/rf/rf_model.pkl
+
+    train_xgboost:
+      cmd: python Training/xgboost.py
+      deps:
+        - data/processed/train/X_train.csv
+        - data/processed/test/X_test.csv
+        - data/processed/train/y_train.csv
+        - data/processed/test/y_test.csv
+      outs:
+        - models/XGBoost/xgboost_model.pkl

@@ -3,9 +3,19 @@ from category_encoders.target_encoder import TargetEncoder
 from xgboost import XGBClassifier, plot_importance
 from skopt import BayesSearchCV
 from skopt.space import Real, Categorical, Integer
+import pandas as pd
+import pickle
+from pathlib import Path
 
 
-def xgboost_training(X_train, y_train, X_test, y_test):
+def xgboost_training():
+
+    OUT_DIR = Path("../models/XGBoost/")
+
+    X_train = pd.read_csv("data/processed/train/X_train.csv")
+    X_test = pd.read_csv("data/processed/test/X_test.csv")
+    y_train = pd.read_csv("data/processed/train/y_train.csv")
+    y_test = pd.read_csv("data/processed/test/y_test.csv")
 
     estimators = [
         'encoder', TargetEncoder(),
@@ -37,5 +47,7 @@ def xgboost_training(X_train, y_train, X_test, y_test):
     xgboost_step = opt.best_estimator_.steps[1]
     xgboost_model = xgboost_step[1]
     plot_importance(xgboost_model)    
+
+    pickle.dump(opt, open(OUT_DIR / "xgboost_model.pkl", "wb"))
 
 

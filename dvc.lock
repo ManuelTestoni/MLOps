@@ -53,8 +53,8 @@ stages:
     deps:
     - path: PreProcessing/split.py
       hash: md5
-      md5: 98a339e6a9c363873e552c0727b1eb9c
-      size: 1530
+      md5: 9291d3ae2d7e0f21d5f00e3dc4f25735
+      size: 1575
     - path: data/processed/data_encoded.csv
       hash: md5
       md5: b213e58add1549562cbc94b9cc3eca0d
@@ -76,3 +76,10 @@ stages:
       hash: md5
       md5: 876bada6439c1f33dc5f17218a6915d5
       size: 11256
+  train_rf:
+    cmd: python Training/rf.py
+    deps:
+    - path: PreProcessing/split.py
+      hash: md5
+      md5: 9291d3ae2d7e0f21d5f00e3dc4f25735
+      size: 1575
