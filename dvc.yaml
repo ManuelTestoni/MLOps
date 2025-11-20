@@ -42,14 +42,16 @@ stages:
       - data/processed/train/y_train.csv
       - data/processed/test/y_test.csv
     outs:
-      - models/rf/rf_model.pkl
+      - models/rf/random_forest_model.pkl
+      - data/metrics/rf/rf_metrics.json
 
-    train_xgboost:
-      cmd: python Training/xgboost.py
-      deps:
-        - data/processed/train/X_train.csv
-        - data/processed/test/X_test.csv
-        - data/processed/train/y_train.csv
-        - data/processed/test/y_test.csv
-      outs:
-        - models/XGBoost/xgboost_model.pkl
+  train_xgboost:
+    cmd: python Training/train_xgboost.py
+    deps:
+      - data/processed/train/X_train.csv
+      - data/processed/test/X_test.csv
+      - data/processed/train/y_train.csv
+      - data/processed/test/y_test.csv
+    outs:
+      - models/XGBoost/xgboost_model.pkl
+      - data/metrics/xgboost/xgboost_metrics.json

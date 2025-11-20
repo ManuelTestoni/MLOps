@@ -7,8 +7,8 @@ import json
 
 def random_forest_training():
 
-    OUT_DIR = Path("../models/rf/")
-    METRICS_DIR = Path("../data/metrics/rf/")
+    OUT_DIR = Path("models/rf/")
+    METRICS_DIR = Path("data/metrics/rf/")
 
     # Create directories if they don't exist
     OUT_DIR.mkdir(parents=True, exist_ok=True)
