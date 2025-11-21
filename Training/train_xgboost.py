@@ -1,3 +1,5 @@
+import mlflow
+from mlflow.models import infer_signature
 from xgboost import XGBClassifier, plot_importance
 from skopt import BayesSearchCV
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
@@ -9,6 +11,12 @@ import json
 
 
 def xgboost_training():
+
+    #Create connection for MLFlow
+    print("-------------------------")
+    print("Connecting to MLFlow...")
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    print("Connected")
 
     OUT_DIR = Path("models/XGBoost/")
     METRICS_DIR = Path("data/metrics/XGBoost/")
@@ -35,7 +43,7 @@ def xgboost_training():
 
     opt = BayesSearchCV(estimator=clf, search_spaces = search_space, cv=10, n_iter=100, scoring='roc_auc', random_state=8)
 
-    opt.fit(X_train, y_train)
+    opt.fit(X_train, y_train.values.ravel())
     y_pred = opt.predict(X_test)
 
     #Calculating Metrics
@@ -51,6 +59,22 @@ def xgboost_training():
         "support_0": int(support_per_class[0]),
         "support_1": int(support_per_class[1])
     }
+
+    with mlflow.start_run():
+        mlflow.log_params(opt.best_params_)
+
+        mlflow.log_metrics(metrics)
+        mlflow.set_tag("model", "XGBoost_Classifier")
+        signature = infer_signature(X_train, opt.predict(X_train))
+        model_info = mlflow.sklearn.log_model(
+            sk_model=opt, 
+            name="XGBoost_model", 
+            signature=signature, 
+            input_example=X_train, 
+            registered_model_name="ChurnModel_Staging")
+    
+    loaded_model = mlflow.pyfunc.load_model(model_info.model_uri)
+    predictions = loaded_model.predict(X_test)
 
     with open(METRICS_DIR / "xgboost_metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)

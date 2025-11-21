@@ -1,4 +1,6 @@
 import pandas as pd
+import mlflow
+from mlflow.models import infer_signature
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, precision_recall_fscore_support
 import pickle
@@ -6,6 +8,14 @@ from pathlib import Path
 import json
 
 def random_forest_training():
+
+    #Create connection for MLFlow
+    print("-------------------------")
+    print("Connecting to MLFlow...")
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    print("Connected")
+
+    mlflow.set_experiment("Churn_Prediction")
 
     OUT_DIR = Path("models/rf/")
     METRICS_DIR = Path("data/metrics/rf/")
@@ -22,13 +32,21 @@ def random_forest_training():
     y_test = pd.read_csv("data/processed/test/y_test.csv")
 
     #Hyper Parameters
-    rf = RandomForestClassifier(n_estimators=1000, criterion= 'entropy', min_samples_split = 10, max_depth= 14, random_state = 42)
-    rf.fit(X_train, y_train)
+
+    params = {
+        "n_estimators": 1000,
+        "criterion": 'entropy',
+        "min_samples_split": 10,
+        "max_depth": 14,
+        "random_state": 42
+    }
+
+    rf = RandomForestClassifier(**params)
+    rf.fit(X_train, y_train.values.ravel())
     print("Model Training Completed")
     print("-------------------------")
-    print("Model Evaluation:")
     y_pred = rf.predict(X_test)
-    print(rf.score(X_test, y_test))
+    
 
     #Calculating Metrics
     accuracy = accuracy_score(y_test, y_pred)
@@ -36,13 +54,30 @@ def random_forest_training():
     _, _, _, support_per_class = precision_recall_fscore_support(y_test, y_pred, average=None)
 
     metrics = {
-         "accuracy": round(accuracy, 4),
+        "accuracy": round(accuracy, 4),
         "precision_macro": round(precision, 4),
         "recall_macro": round(recall, 4),
         "f1_macro": round(f1, 4),
         "support_0": int(support_per_class[0]),
         "support_1": int(support_per_class[1])
     }
+
+    with mlflow.start_run():
+        mlflow.log_params(params)
+
+        mlflow.log_metrics(metrics)
+        mlflow.set_tag("model", "Random_Forest_Classifier")
+        signature = infer_signature(X_train, rf.predict(X_train))
+        model_info = mlflow.sklearn.log_model(
+            sk_model=rf, 
+            name="random_forest_model", 
+            signature=signature, 
+            input_example=X_train, 
+            registered_model_name="ChurnModel_Staging")
+    
+    loaded_model = mlflow.pyfunc.load_model(model_info.model_uri)
+    predictions = loaded_model.predict(X_test)
+    
 
     with open(METRICS_DIR / "rf_metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)

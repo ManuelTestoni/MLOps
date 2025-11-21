@@ -57,6 +57,9 @@ cover/
 
 # Project specific
 ./config
+mlartifacts
+mlruns
+mlflow.db
 
 # Django stuff:
 *.log
