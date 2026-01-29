@@ -18,7 +18,7 @@ def xgboost_training():
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
     print("Connected")
 
-    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps")
     OUT_DIR = BASE_DIR / "models/XGBoost"
     METRICS_DIR = BASE_DIR / "data/metrics/XGBoost"
 

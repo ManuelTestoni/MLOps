@@ -6,7 +6,7 @@ import pickle
 def split_data():
 
     #setting up paths
-    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps")
     DIR = BASE_DIR / "data/processed"
     TRAIN_DIR = DIR / "train"
     TEST_DIR = DIR / "test"

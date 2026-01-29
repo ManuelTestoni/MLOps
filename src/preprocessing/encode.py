@@ -8,7 +8,7 @@ def encode_features():
     Executes one hot encoding and binary encoding on the dataset.
     """
     # Setting up paths
-    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps")
     DIR = BASE_DIR / "data/processed"
 
     df = pd.read_csv(DIR / "data_cleaned.csv")

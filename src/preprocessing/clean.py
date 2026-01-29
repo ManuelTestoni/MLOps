@@ -5,7 +5,7 @@ import numpy as np
 def clean_data():
     """Cleans data and restructure the dataset for analysis"""
 
-    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps")
     INPUT_DIR = BASE_DIR / "data/raw"
     OUTPUT_DIR = BASE_DIR / "data/processed"
     #Some debugging prints

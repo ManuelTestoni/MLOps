@@ -17,7 +17,7 @@ def random_forest_training():
 
     mlflow.set_experiment("Churn_Prediction")
 
-    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps")
     OUT_DIR = BASE_DIR / "models/rf"
     METRICS_DIR = BASE_DIR / "data/metrics/rf"
 
