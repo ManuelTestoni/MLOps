@@ -1,64 +1,64 @@
 schema: '2.0'
 stages:
   clean:
-    cmd: python PreProcessing/clean.py
+    cmd: python src/preprocessing/clean.py
     deps:
-    - path: PreProcessing/clean.py
-      hash: md5
-      md5: 47c28d009267cb6e88a597e0a1c50d88
-      size: 790
     - path: data/raw/data.csv
       hash: md5
       md5: 0f9de68e012bd3aed5fa7cdc9fc421af
       size: 977501
+    - path: src/preprocessing/clean.py
+      hash: md5
+      md5: a87c1e04c2498681b939b03db2ac6e5c
+      size: 868
     outs:
     - path: data/processed/data_cleaned.csv
       hash: md5
       md5: 6a9a5a59515842104cc2d3e9d2b2fdce
       size: 900327
   encode:
-    cmd: python PreProcessing/encode.py
+    cmd: python src/preprocessing/encode.py
     deps:
-    - path: PreProcessing/encode.py
-      hash: md5
-      md5: f74136beb0948ce60b84a05eea303076
-      size: 1734
     - path: data/processed/data_cleaned.csv
       hash: md5
       md5: 6a9a5a59515842104cc2d3e9d2b2fdce
       size: 900327
+    - path: src/preprocessing/encode.py
+      hash: md5
+      md5: 5379f16fd461f48da00308ff5e8a8d66
+      size: 1819
     outs:
     - path: data/processed/data_encoded.csv
       hash: md5
       md5: b213e58add1549562cbc94b9cc3eca0d
       size: 1191483
   scale:
-    cmd: python PreProcessing/scale.py
+    cmd: python src/preprocessing/scale.py
     deps:
-    - path: PreProcessing/scale.py
-      hash: md5
-      md5: a6780d5e71041b4f141ada96fb3d5b61
-      size: 743
     - path: data/processed/data_encoded.csv
       hash: md5
       md5: b213e58add1549562cbc94b9cc3eca0d
       size: 1191483
+    - path: src/preprocessing/scale.py
+      hash: md5
+      md5: 63b8762aae4ac5096ffe195b487b4451
+      size: 817
     outs:
     - path: data/processed/data_scaled.csv
       hash: md5
       md5: 310506d79658e0b91d597f8484914967
       size: 1530742
   split:
-    cmd: python PreProcessing/split.py
+    cmd: python src/preprocessing/split.py
     deps:
-    - path: PreProcessing/split.py
-      hash: md5
-      md5: 8beef82e64f94bb6df82b62f46a90446
-      size: 1531
     - path: data/processed/data_encoded.csv
       hash: md5
       md5: b213e58add1549562cbc94b9cc3eca0d
       size: 1191483
+    - path: src/preprocessing/split.py
+      hash: md5
+      md5: 6f99ba84314dfe578c4e5946850a35f5
+      size: 1591
     outs:
     - path: data/processed/test/X_test.csv
       hash: md5
