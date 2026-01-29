@@ -10,7 +10,8 @@ def scale_data():
                   "TotalCharges",
                   "tenure"]
     
-    DIR = Path("data/processed/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    DIR = BASE_DIR / "data/processed"
     df = pd.read_csv(DIR / "data_encoded.csv")
     scaler = StandardScaler()
 

@@ -8,7 +8,8 @@ def encode_features():
     Executes one hot encoding and binary encoding on the dataset.
     """
     # Setting up paths
-    DIR = Path("data/processed/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    DIR = BASE_DIR / "data/processed"
 
     df = pd.read_csv(DIR / "data_cleaned.csv")
 
@@ -55,7 +56,7 @@ def encode_features():
     feature_columns = [col for col in df.columns if col != "Churn"]
 
     #Creating file if not exists
-    with open("data/processed/feature_columns.json", "w") as f:
+    with open(BASE_DIR / "data/processed/feature_columns.json", "w") as f:
         json.dump(feature_columns, f, indent=4)
     df.to_csv(DIR / 'data_encoded.csv', index=False)
     

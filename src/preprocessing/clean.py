@@ -5,8 +5,9 @@ import numpy as np
 def clean_data():
     """Cleans data and restructure the dataset for analysis"""
 
-    INPUT_DIR = Path("data/raw/")
-    OUTPUT_DIR = Path("data/processed/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    INPUT_DIR = BASE_DIR / "data/raw"
+    OUTPUT_DIR = BASE_DIR / "data/processed"
     #Some debugging prints
     print("-------------------------")
     print("Data Loading Completed")

@@ -1,33 +1,33 @@
 stages:
   clean:
-    cmd: python PreProcessing/clean.py
+    cmd: python src/preprocessing/clean.py
     deps:
       - data/raw/data.csv
-      - PreProcessing/clean.py
+      - src/preprocessing/clean.py
     outs:
       - data/processed/data_cleaned.csv
 
   encode:
-    cmd: python PreProcessing/encode.py
+    cmd: python src/preprocessing/encode.py
     deps:
       - data/processed/data_cleaned.csv
-      - PreProcessing/encode.py
+      - src/preprocessing/encode.py
     outs:
       - data/processed/data_encoded.csv
 
   scale:
-    cmd: python PreProcessing/scale.py
+    cmd: python src/preprocessing/scale.py
     deps:
       - data/processed/data_encoded.csv
-      - PreProcessing/scale.py
+      - src/preprocessing/scale.py
     outs:
       - data/processed/data_scaled.csv
 
   split:
-    cmd: python PreProcessing/split.py
+    cmd: python src/preprocessing/split.py
     deps:
       - data/processed/data_encoded.csv
-      - PreProcessing/split.py
+      - src/preprocessing/split.py
     outs:
       - data/processed/train/X_train.csv
       - data/processed/test/X_test.csv
@@ -35,7 +35,7 @@ stages:
       - data/processed/test/y_test.csv
 
   train_rf:
-    cmd: python Training/rf.py
+    cmd: python src/training/rf.py
     deps:
       - data/processed/train/X_train.csv
       - data/processed/test/X_test.csv
@@ -46,7 +46,7 @@ stages:
       - data/metrics/rf/rf_metrics.json
 
   train_xgboost:
-    cmd: python Training/train_xgboost.py
+    cmd: python src/training/train_xgboost.py
     deps:
       - data/processed/train/X_train.csv
       - data/processed/test/X_test.csv

@@ -13,10 +13,10 @@ def preprocess_data():
     """
     Pre-processing function calls
     """
-    from PreProcessing.clean import clean_data 
-    from PreProcessing.encode import encode_features
-    from PreProcessing.scale import scale_data
-    from PreProcessing.split import split_data
+    from src.preprocessing.clean import clean_data 
+    from src.preprocessing.encode import encode_features
+    from src.preprocessing.scale import scale_data
+    from src.preprocessing.split import split_data
     clean_data()
     encode_features()
     scale_data()
@@ -28,7 +28,7 @@ def train_random_forest():
     """
     Random Forest training and MLFlows logging function.
     """
-    from Training.rf import random_forest_training
+    from src.training.rf import random_forest_training
     random_forest_training()
     
 
@@ -36,7 +36,7 @@ def train_xgboost():
     """
     Xgboost training and MLFlows logging function.
     """
-    from Training.train_xgboost import xgboost_training
+    from src.training.train_xgboost import xgboost_training
     xgboost_training()
 
 

@@ -1,5 +1,5 @@
-from PreProcessing import clean_data, encode_features, scale_data, split_data
-from Training import random_forest_training, xgboost_training
+from preprocessing import clean_data, encode_features, scale_data, split_data
+from training import random_forest_training, xgboost_training
 
 if __name__ == "__main__":
     clean_data()

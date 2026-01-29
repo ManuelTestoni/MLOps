@@ -17,19 +17,20 @@ def random_forest_training():
 
     mlflow.set_experiment("Churn_Prediction")
 
-    OUT_DIR = Path("models/rf/")
-    METRICS_DIR = Path("data/metrics/rf/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    OUT_DIR = BASE_DIR / "models/rf"
+    METRICS_DIR = BASE_DIR / "data/metrics/rf"
 
     # Create directories if they don't exist
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     METRICS_DIR.mkdir(parents=True, exist_ok=True)
 
-    df = pd.read_csv("data/processed/data_encoded.csv")
+    df = pd.read_csv(BASE_DIR / "data/processed/data_encoded.csv")
     X = df.iloc[:, 0:34]
-    X_train = pd.read_csv("data/processed/train/X_train.csv")
-    X_test = pd.read_csv("data/processed/test/X_test.csv")
-    y_train = pd.read_csv("data/processed/train/y_train.csv")
-    y_test = pd.read_csv("data/processed/test/y_test.csv")
+    X_train = pd.read_csv(BASE_DIR / "data/processed/train/X_train.csv")
+    X_test = pd.read_csv(BASE_DIR / "data/processed/test/X_test.csv")
+    y_train = pd.read_csv(BASE_DIR / "data/processed/train/y_train.csv")
+    y_test = pd.read_csv(BASE_DIR / "data/processed/test/y_test.csv")
 
     #Hyper Parameters
 

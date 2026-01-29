@@ -6,9 +6,10 @@ import pickle
 def split_data():
 
     #setting up paths
-    DIR = Path("data/processed/")
-    TRAIN_DIR = Path(DIR / "train/")
-    TEST_DIR = Path(DIR / "test/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    DIR = BASE_DIR / "data/processed"
+    TRAIN_DIR = DIR / "train"
+    TEST_DIR = DIR / "test"
 
     # Create directories if they don't exist
     TRAIN_DIR.mkdir(parents=True, exist_ok=True)

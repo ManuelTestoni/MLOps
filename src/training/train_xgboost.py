@@ -18,13 +18,14 @@ def xgboost_training():
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
     print("Connected")
 
-    OUT_DIR = Path("models/XGBoost/")
-    METRICS_DIR = Path("data/metrics/XGBoost/")
+    BASE_DIR = Path("/Users/chad/Desktop/Documenti/Uni/4_Anno/MLOps/src")
+    OUT_DIR = BASE_DIR / "models/XGBoost"
+    METRICS_DIR = BASE_DIR / "data/metrics/XGBoost"
 
-    X_train = pd.read_csv("data/processed/train/X_train.csv")
-    X_test = pd.read_csv("data/processed/test/X_test.csv")
-    y_train = pd.read_csv("data/processed/train/y_train.csv")
-    y_test = pd.read_csv("data/processed/test/y_test.csv")
+    X_train = pd.read_csv(BASE_DIR / "data/processed/train/X_train.csv")
+    X_test = pd.read_csv(BASE_DIR / "data/processed/test/X_test.csv")
+    y_train = pd.read_csv(BASE_DIR / "data/processed/train/y_train.csv")
+    y_test = pd.read_csv(BASE_DIR / "data/processed/test/y_test.csv")
 
     clf = XGBClassifier(random_state=42)
 
